@@ -5,20 +5,16 @@
 
 /**
  * @brief Constructor for the mt19937 algorithm
- * @note This is the LCD implementation (Linear Congruential Generator)
+ * @note This is the standard Implementation
  * 
  * Sets the _index value to 624 for initial twist() call
  * @param seed for populating the MT Matrix
  */
 mt19937::mt19937(const uint32_t seed){
-    _index = 624;
-    uint32_t _gseed = seed;
-    for (int i = 0; i < 51; i++){
-        _gseed = _gseed * 69069 + 1;
-    }
-    for (int i = 0; i < 624; i++){
-        _gseed = 69069 * _gseed + 1;
-        _mt[i] = _gseed & 0xFFFFFFFF;
+    _index = MT_N;
+    _mt[0] = seed;
+    for (uint32_t i = 1; i < MT_N; i++){
+        _mt[i] = 1812433253U * (_mt[i - 1] ^ (_mt[i - 1] >> 30)) + i;
     }
 }
 
