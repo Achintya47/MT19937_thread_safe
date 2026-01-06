@@ -1,3 +1,10 @@
+/**
+ * @file mt19937_consts.hpp
+ * @brief Declaration of Algorithm constants for the MT19937 Algorithm.
+ * @author Achintya
+ * @date 2026-01-07
+ */
+
 #ifndef MT19937_Consts
 #define MT19937_Consts
 
