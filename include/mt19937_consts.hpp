@@ -44,4 +44,11 @@
  */
 #define MT_MATRIX_A   0x9908B0DFU
 
+/**
+ * @brief Masking Constants specific to temper function
+ */
+#define MT_D 0xFFFFFFFFU
+#define MT_B 0x9d2c5680U
+#define MT_C 0xEFC60000U
+
 #endif

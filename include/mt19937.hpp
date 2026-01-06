@@ -2,14 +2,6 @@
 #define MT19937
 #include <cstdint>
 
-/**
- * @brief Masking Constants specific to temper function
- */
-#define MT_D 0xFFFFFFFFU
-#define MT_B 0x9d2c5680U
-#define MT_C 0xEFC60000U
-
-
 class mt19937{
     private:
         uint32_t _mt[624];

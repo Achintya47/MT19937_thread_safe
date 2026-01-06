@@ -1,23 +1,15 @@
 #include <iostream>
 #include <cstdint>
 #include "mt19937.hpp"
-
-
-class mt19937{
-    private:
-        uint32_t _mt[624];
-        uint16_t _index;
-        void twist();
-        static uint32_t temper(uint32_t);
-    public:
-        explicit mt19937(const uint32_t);
-        uint32_t next();
-};
+#include "mt19937_consts.hpp"
 
 /**
-* @brief Constructor for growing and sowing seeds
-* @param seed Seed value used to populate the matrix
-*/
+ * @brief Constructor for the mt19937 algorithm
+ * @note This is the LCD implementation (Linear Congruential Generator)
+ * 
+ * Sets the _index value to 624 for initial twist() call
+ * @param seed for populating the MT Matrix
+ */
 mt19937::mt19937(const uint32_t seed){
     _index = 624;
     uint32_t _gseed = seed;
@@ -36,11 +28,21 @@ mt19937::mt19937(const uint32_t seed){
  * Called only by mt19937::next(), Stateless and independent
  * of mt19937::twist()
  */
-uint32_t mt19937::temper(uint32_t _mt0){
-    uint32_t y = _mt0;
-    y ^= (y >> 11) & MT_D;
+uint32_t mt19937::temper(uint32_t value){
+    uint32_t y = value;
+    y ^= (y >> 11);
     y ^= (y << 5) & MT_B;
     y ^= (y << 15) & MT_C;
     y ^= y >> 18;
     return y;
+}
+
+uint32_t mt19937::next(){
+    if (_index > MT_N){
+        twist();
+        _index = 0;
+    }
+    uint32_t output = temper(_mt[_index]);
+    _index++;
+    return output;    
 }
