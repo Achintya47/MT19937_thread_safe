@@ -46,7 +46,7 @@ uint32_t x = rng.next();
 
 ### Build Steps
 ```bash
-git clone <repo-url>
+git clone "https://github.com/Achintya47/MT19937_thread_safe"
 cd mt19937_thread_safe
 mkdir build
 cd build
