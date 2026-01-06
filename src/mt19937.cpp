@@ -31,14 +31,14 @@ mt19937::mt19937(const uint32_t seed){
 uint32_t mt19937::temper(uint32_t value){
     uint32_t y = value;
     y ^= (y >> 11);
-    y ^= (y << 5) & MT_B;
+    y ^= (y << 7) & MT_B;
     y ^= (y << 15) & MT_C;
     y ^= y >> 18;
     return y;
 }
 
 uint32_t mt19937::next(){
-    if (_index > MT_N){
+    if (_index >= MT_N){
         twist();
         _index = 0;
     }
